@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  topic: MyString
+  pages: 1
+  discipline: MyString
+  service: false
+  format: MyString
+  paper_instructions: MyText
+
+two:
+  type: 
+  topic: MyString
+  pages: 1
+  discipline: MyString
+  service: false
+  format: MyString
+  paper_instructions: MyText

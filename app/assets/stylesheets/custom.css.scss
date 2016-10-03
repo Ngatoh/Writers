@@ -1,0 +1,143 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/*Universal*/
+
+body{
+   padding-top: 70px;
+  }
+
+section{
+   overflow: auto;
+}
+
+/*Footer*/
+
+footer{
+    margin-top: 45px;
+    padding-top: 5px;
+    border-top: 1px solid #eaeaea;
+   }
+
+
+/* Miscellinious */
+
+@mixin box_sizing {
+          -moz-box-sizing: border-box;
+          -webkit-box-sizing: border-box;
+           box-sizing:     border-box;
+}
+
+/* Forms */
+
+form  {
+  margin-bottom: 15px;
+}
+
+input {
+   height: auto !important;
+   margin-bottom: 15px;
+   @include box_sizing;
+}
+
+#new_paper{
+  select,textarea{
+   height: auto !important;
+   margin-bottom: 15px;
+   width: 100%;
+   @include box_sizing;
+  }
+}
+
+
+
+ #order_type_of_paper, #order_pages, #order_discipline, #order_format, #order_type_of_service,textarea{
+   height: auto !important;
+   margin-bottom: 15px;
+   width: 100%;
+   @include box_sizing;
+  }
+
+#order_deadline{
+  margin-top: 15px;
+}
+
+
+#paper_topic, #order_topic{
+  height: auto !important;
+   margin-bottom: 15px;
+   width: 100%;
+   @include box_sizing;
+}
+
+.checkbox {
+    margin-top: -10px;
+    margin-bottom: 10px;
+ span {
+    margin-left: 20px;
+    font-weight: normal;
+    }
+}
+
+#session_remember_me, #paper_free{
+    width: auto;
+    margin-left: 0;
+}
+
+
+
+
+.debug_dump{
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  @include box_sizing;
+}
+
+
+/* All Users */
+
+.users {
+list-style: none;
+margin: 0;
+li {
+overflow: auto;
+padding: 10px 0;
+border-bottom: 1px solid $gray-lighter;
+}
+}
+
+.instructions{
+  width: 40%;
+}
+
+.list_actions {
+  text-align: right;
+  padding-left: 3em;
+}
+/* Buy now button */
+.button_to{
+  margin-bottom: 0px;
+  padding: 0px;
+  border: 0px;
+}
+
+/*Orders feed*/
+#feed{
+  @include box_sizing;
+}
+
+/*Align custom headers*/
+
+.pageheadings{
+  text-align: center;
+}
+
+.messagebox{
+  color: #ffffff;
+  background-color: #337ab7;
+  border-bottom: 1px solid #2e6da4;
+  word-wrap: break-word;
+  border-radius: 5px;
+}

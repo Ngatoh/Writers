@@ -1,0 +1,40 @@
+<%= form_for(Paper.new) do |f| %>
+	<%= render 'shared/error_messages', object: f.object %>
+		<%= f.label :type_of_paper, "Type of paper" %>
+		<%= f.select(:type_of_paper, (["Essay (any type)", "Admission essay", "Annotated bibliography",
+			"Argumentative essay", "Article review", "Book/Movie review", "Business plan",
+			"Case study", "Coursework", "Creative writing", "Critical thinking", "Presentation or speech",
+			"Research paper", "Research proposal", "Term paper", "Thesis/Dissertation chapter", "other" ])) %>
+
+		<%= f.label :topic %>
+		<%= f.text_field :topic %>
+
+		<%= f.label :pages%>
+		<%= f.select(:pages, (('1'..'20')))%>
+
+		<%= f.label :discipline %>
+		<%= f.select(:discipline, (["English and Literature", "Business and Management", "Marketing", "Economics", "History", "Religion/Theology", "Psychology and Education", "Political science",
+		    "Sociology", "Philosophy", "Health Ccare and Life Sciences", "Computer science", "Mathematics and Statistics", "Law", "Other" ])) %>
+
+		<%= f.label :format, "Format or Citation style" %>
+		<%= f.select(:format, (["APA", "MLA", "Harvad", "Chicago", "Other"]) )%>
+
+		<%= f.label :free, class: "checkbox inline" do %>
+			<%= f.check_box :free %>
+			<span>Check here to upload as a free paper</span>
+		<% end %>
+
+		<%= f.label :paper_instructions %>
+		<%= f.text_area :paper_instructions, rows:10 %>
+
+		<%= f.label :document, "Upload Paper"%>
+		<%= f.file_field :document %>
+
+		<%= f.label :sample_document, "Upload sample if not a free paper."%>
+		<%= f.file_field :sample_document %>
+		<span>
+			<p><strong>Upload Additional Materials</strong></p>
+			<%= file_field_tag "additional_materials[]", type: :file, multiple: true %>
+		</span>
+		<%= f.submit "Upload", class: 'btn btn-primary' %>
+<%- end %>

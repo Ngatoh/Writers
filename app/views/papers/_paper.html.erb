@@ -1,0 +1,36 @@
+<tr>
+	<td><%- if !paper.free? %>
+		<%= link_to image_tag("logo.png", :size =>"128x128"), downloadsample_paper_path(paper) %>
+		<%-else %>
+		<%= link_to image_tag("logo.png", :size =>"128x128"), download_paper_path(paper) %>
+		<%-end%>
+	</td>
+	<td>
+		<span><strong>Type of paper: </strong><%= paper.type_of_paper %><br></span>
+		<span><strong>Topic: </strong><%= paper.topic %><br></span>
+		<span><strong>Discipline: </strong><%= paper.discipline %><br></span>
+		<span><strong>Format: </strong><%= paper.format %><br></span>
+		<span><strong>Pages: </strong><%= paper.pages %><br></span>
+		<% if !paper.free? %>
+			<span><strong>Price: </strong><%= number_to_currency(paper.price) %><br></span>
+		<%- end %>
+	</td>
+	<td class="instructions">
+			<span><strong>Paper instructions: </strong><br></span>
+			<%= simple_format(paper.paper_instructions) %>
+		
+	</td>
+	<td class="list_actions">
+	<% if !paper.free? %>
+		<strong><%= button_to "Buy Now", purchases_path(paper, :purchase => {:paper_id => paper.id}), class: 'btn btn-primary' %><br></strong>
+		<strong><%= link_to "Download Sample", downloadsample_paper_path(paper) %><br></strong>
+	<%- else %>
+		<strong><%= link_to "Download", download_paper_path(paper) %><br></strong>
+	<%-end %>
+	<strong><%= link_to "Make an exact order", new_order_path(paper) %><br></strong>
+	
+	<% if logged_in? && current_user.admin? %>
+	<%= link_to "Remove", paper, confirm: 'Are you sure?', method: :delete %>
+	<% end %>
+	</td>
+</tr>

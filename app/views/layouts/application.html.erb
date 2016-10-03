@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Essay hookup |<%= yield(:title)%></title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <%= render 'layouts/shim' %> 
+</head>
+<body>
+<%- if logged_in? && current_user.admin? %>
+  <%= render 'layouts/adminheader' %>
+<%- else %>
+ <%= render 'layouts/header' %>
+<%- end %>
+ <main role="main">
+ <div class="container">
+     <%- flash.each do |message_type, message| %>
+       <div class="alert alert-<%= message_type %>">
+       <button type="button" class="close" data-dismiss="alert">&times;</button>
+       <%= message %>
+       </div>
+     <%- end %>
+     <%= yield %>
+    
+    
+ </div>
+  <%= render 'layouts/footer' %>
+  <%= debug(params) if Rails.env.development? %>
+</main>
+</body>
+</html>

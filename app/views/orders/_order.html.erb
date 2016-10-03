@@ -1,0 +1,17 @@
+<tr>
+	<td>
+		<span><strong>Type of paper: </strong><%= order.type_of_paper %><br></span>
+		<span><strong>Topic: </strong><%= order.topic %><br></span>
+		<span><strong>Discipline: </strong><%= order.discipline %><br></span>
+		<span><strong>Format: </strong><%= order.format %><br></span>
+		<span><strong>Pages: </strong><%= order.pages %><br></span>
+		<span><strong>Price: </strong><%= number_to_currency(order.price) %><br></span>
+		<span><strong>Deadline:</strong><%= order.deadline.strftime("%F--%T") %><br></span>
+	</td>
+	<td class="list_actions">
+		<strong><%= link_to "Show", order_path(order)%></strong><br>
+		<%- if !order.answered? %>
+			<strong><%= link_to "Cancel", '#'%></strong>			
+		<%- end %>
+	</td>
+</tr>

@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  type_of_paper: MyString
+  topic: MyString
+  pages: 1
+  deadline: 2015-09-08 12:29:02
+  discipline: MyString
+  type_of_service: MyString
+  format: MyString
+  paper_instructions: MyText
+
+two:
+  user_id: 
+  type_of_paper: MyString
+  topic: MyString
+  pages: 1
+  deadline: 2015-09-08 12:29:02
+  discipline: MyString
+  type_of_service: MyString
+  format: MyString
+  paper_instructions: MyText

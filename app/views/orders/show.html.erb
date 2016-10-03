@@ -1,0 +1,55 @@
+<%- provide(:title, "Your order")%>
+<div class="row">
+
+	<div class="col-md-4">
+			<p><strong>Type of paper: </strong><%= @order.type_of_paper %></p>
+			<p><strong>Topic: </strong><%= @order.topic %></p>
+			<p><strong>Discipline: </strong><%= @order.discipline %></p>
+			<p><strong>Format: </strong><%= @order.format %></p>
+			<p><strong>Pages: </strong><%= @order.pages %></p>
+			<p><strong>Price: </strong> <%=number_to_currency(@order.price)%></p>
+
+		
+			<p><strong>Paper instructions: </strong><br></p>
+				<%= simple_format(@order.paper_instructions) %>
+			<%-if !@materials.nil? %>
+				<p><strong>Additional Materials: </strong><%= pluralize(@materials.count, "file")%></p>
+				<%- @materials.each do |material|%>
+					<strong><%= link_to "download source", download_extra_path(material,@order)%></strong><br>
+				<%- end %>
+			<%- end %>
+	</div>
+	<%- if current_user.admin? %>
+		<div class="col-md-4">
+			<%= form_for(Answer.new) do |f| %>
+			    <%= hidden_field_tag :order_id, @order.id %>
+			    <%= f.label :attachment, "Post an answer here"%>
+				<%= f.file_field :attachment %>
+				<%= f.submit "Upload", class: 'btn btn-primary'%>
+			<%- end %>
+		</div>
+	<%- end%>
+
+	<div class="col-md-3" >
+		<div id="messages">
+			<%- if current_user.admin? %>
+				<h3><strong>Chat with Customer</strong></h3>
+			<%- else%>
+				<h3><strong>Chat with Writer</strong></h3>
+			<%- end %>
+		   <% if !@messages.nil? %>
+		    <%= will_paginate @messages %>
+			 <%= render @messages %>
+			<%- end %>
+		</div>
+     <%= form_for Message.new, remote: true  do |f|%>
+        <%= render 'shared/error_messages', object: f.object %>
+     	<%= hidden_field_tag :order_id, @order.id %>
+     	<%= f.text_area :content, row: 10, col: 5 %>
+     	<%= f.submit "Send", class: 'btn btn-primary'%>
+     <%- end %>
+     <%= subscribe_to @path %>
+	</div>
+
+</div>
+

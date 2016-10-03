@@ -1,0 +1,17 @@
+<div class="messagebox">
+ <% if message.created_at > 24.hours.ago %>
+
+	<small><%= message.created_at.strftime("%T") %></small><br>
+
+ <%- elsif message.created_at < 1.week.ago %>
+
+   <small><%= message.created_at.strftime("%D") %></small><br>
+
+ <%- elsif message.created_at < 1.month.ago %>
+
+   <small><%= message.created_at.strftime("%F") %></small><br>
+
+  <%- end %>
+  
+	<%=simple_format(message.content) %>
+</div>

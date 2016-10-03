@@ -1,0 +1,35 @@
+
+<div class="row">
+	<div class="col-md-4">
+	<%= form_for(@order, multipart: true ) do |f| %>
+	<%= render 'shared/error_messages', object: f.object %>
+		<%= f.label :type_of_paper, "Type of paper" %>
+		<%= f.text_field :type_of_paper, :value => @paper.type_of_paper, :readonly => 'readonly' %>
+
+		<%= f.label :topic %>
+		<%= f.text_field :topic, :value => @paper.topic, :readonly => 'readonly' %>
+
+		<%= f.label :pages %>
+		<%= f.text_field :pages, :value => @paper.pages, :readonly => 'readonly' %>
+
+		<%= f.label :discipline %>
+		<%= f.text_field :discipline, :value => @paper.discipline, :readonly => 'readonly' %>
+
+		<%= f.label :format, "Format or Citation style" %>
+		<%= f.text_field :format, :value => @paper.format, :readonly => 'readonly' %>
+
+		<div>
+			<%= f.label :deadline %><br>
+			<%= f.datetime_select :deadline, :start_year => Date.today.year %><br><br>
+		</div>
+		
+		<%= f.label :type_of_service %>
+		<%= f.text_field :type_of_service, :value => "Rewrite", :readonly => 'readonly' %>
+
+		<%= f.label :paper_instructions %>
+		<%= f.text_area :paper_instructions, :value => @paper.paper_instructions, :readonly => 'readonly' %>
+
+		<%= f.submit "Upload and pay half", class: 'btn btn-primary' %>
+<%- end %>
+</div>
+</div>

@@ -1,0 +1,27 @@
+<% if logged_in? %>
+
+	<%- if current_user.admin? %>
+		<%= render 'users/adminpage'%>
+	<% else %>
+		<%= render 'users/userpage'%>
+	<%- end %>
+<%- else %>
+	<div class="row">
+		<div class="col-md-offset-8 col-md-4">
+
+			<%= form_for  @user do |f|%>
+				<%= render 'shared/error_messages', object: f.object %>
+
+				<%= render 'form', f: f %>
+
+				<%= f.submit "Start Order Now!", class: "btn btn-primary btn-lg" %>
+			<%- end %>	
+		</div>
+	
+	</div>
+<%- end %>
+
+
+
+
+

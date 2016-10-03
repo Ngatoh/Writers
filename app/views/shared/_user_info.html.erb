@@ -1,0 +1,6 @@
+<% if current_user.photo? %>
+	<%= image_tag current_user.photo.url %>
+<%- else %>
+	<%= image_tag("default.png")%>
+<%- end %>
+<p><%= current_user.email %></p>

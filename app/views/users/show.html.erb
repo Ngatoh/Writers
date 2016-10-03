@@ -1,0 +1,70 @@
+<% provide(:title, 'userpage')%>
+<% if current_user.admin? %>
+<%- else %>
+<div class="row">
+	<div class="col-md-6">
+		<h4 class="pageheadings"><strong>Completed Writing Orders</strong></h4>
+		<table class="orders table table-striped ">
+			<%- @orders.each do |order| %>
+				<tr>
+					<td>
+						<span><strong>Type of paper: </strong><%= order.type_of_paper %><br></span>
+						<span><strong>Topic: </strong><%= order.topic %><br></span>
+						<span><strong>Discipline: </strong><%= order.discipline %><br></span>
+						<span><strong>Format: </strong><%= order.format %><br></span>
+						<span><strong>Pages: </strong><%= order.pages %><br></span>
+						<span><strong>Price: </strong><%= number_to_currency(order.price) %><br></span>
+						<span><strong>Deadline:</strong><%= order.deadline.strftime("%F--%T") %><br></span>
+					</td>
+					<td class="list_actions">
+						<strong><%= link_to "Show", order_path(order)%></strong><br>
+						<%- if order.fully_paid? %>
+							<strong><%= link_to "Download", downloadanswer_answer_path(order)%></strong>
+						<%- else%>	
+								<strong><%= link_to "Pay the rest now", pay_fully_path%></strong>	
+						<%- end %>
+					</td>
+				</tr>
+			<%- end %>
+		</table>
+	</div>
+
+	<div class="col-md-6">
+		<h4 class="pageheadings"><strong>Ready Papers</strong></h4>
+		<table class="orders table table-striped ">
+		<%- @papers.each do |paper| %>
+		<tr>
+			<td><% if ispaperpaid?(paper) %>
+					<%= link_to image_tag("logo.png", :size =>"128x128"), download_paper_path(paper) %>
+				<%-else %>
+				<%= link_to image_tag("logo.png", :size =>"128x128"), downloadsample_paper_path(paper) %>
+				<%-end%>
+			</td>
+			<td>
+				<span><strong>Type of paper: </strong><%= paper.type_of_paper %><br></span>
+				<span><strong>Topic: </strong><%= paper.topic %><br></span>
+				<span><strong>Discipline: </strong><%= paper.discipline %><br></span>
+				<span><strong>Format: </strong><%= paper.format %><br></span>
+				<span><strong>Pages: </strong><%= paper.pages %><br></span>
+				<% if !paper.free? %>
+					<span><strong>Price: </strong><%= number_to_currency(paper.price) %><br></span>
+				<%- end %>
+			</td>
+			<td class="list_actions">
+
+			<strong><%= link_to "Download Sample", downloadsample_paper_path(paper) %><br></strong> 		
+			<% if ispaperpaid?(paper) %>
+				<strong><%= link_to "Download", download_paper_path(paper) %><br></strong>
+			<%- else %>
+				<strong><%= link_to "Finish payment", finishpayment_path(paper)%></strong><br>
+				<% if logged_in? %>
+					<strong><%= link_to "Cancel", '#' %></strong><br>
+				<% end %>
+			<%-end %>			
+			</td>
+		</tr>
+		<%- end %>
+			</table>
+	</div>
+</div>
+<%- end %>
